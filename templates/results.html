@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Results</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Analysis Results</h1>
+      <div>
+        <h2>Input Image</h2>
+        <img src="{{ url_for('images', filename='input.png') }}" alt="Input Image">
+      </div>
+      <div>
+        <h2>Merged Image</h2>
+        <img src="{{ url_for('images', filename='merged_image.png') }}" alt="Merged Image">
+      </div>
+      <div>
+        <h2>Prediction Image</h2>
+        <img src="{{ url_for('images', filename='prediction.png') }}" alt="Prediction Image">
+      </div>
+      <div>
+        <h2>Connected Image</h2>
+        <img src="{{ url_for('images', filename='connected.png') }}" alt="Connected Image">
+      </div>
+    </div>
+  </body>
+</html>
