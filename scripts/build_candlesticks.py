@@ -36,7 +36,7 @@ def create_candlestick_chart(data, date, timeframe):
     
     # Plot the candlestick chart
     mpf.plot(resampled_data, type='candle', style='charles', title=f'Candlestick chart for {date_str} at {timeframe}', ylabel='Price')
-    plt.savefig(f'tmp/{date_str}_{timeframe}.png')
+    plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/{date_str}_{timeframe}.png')
 
 # Example usage
 date_to_plot = '2023-02-02'  # Change this to the date you want to plot
