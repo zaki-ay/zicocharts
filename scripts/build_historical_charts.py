@@ -40,5 +40,5 @@ def create_candlestick_chart(data, date, timeframe):
 
 # Example usage
 date_to_plot = '2023-01-27'  # Change this to the date you want to plot
-timeframe_to_plot = '5min'  # Change this to the desired timeframe
+timeframe_to_plot = '15min'  # Change this to the desired timeframe
 create_candlestick_chart(historical_data, date_to_plot, timeframe_to_plot)
