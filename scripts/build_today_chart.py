@@ -4,8 +4,8 @@ import mplfinance as mpf
 import yfinance as yf
 import datetime
 
-BASE_USER = 'homer'
-#BASE_USER = 'zicocharts'
+#BASE_USER = 'homer'
+BASE_USER = 'zicocharts'
 
 # Function to fetch and plot today's candlestick chart for a given stock symbol and timeframe
 def plot_todays_chart(ticker, timeframe):

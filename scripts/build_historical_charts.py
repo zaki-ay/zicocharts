@@ -2,8 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 
-BASE_USER = "homer"
-#BASE_USER = "zicocharts"
+#BASE_USER = "homer"
+BASE_USER = "zicocharts"
 
 # Load historical data
 # data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
@@ -39,6 +39,6 @@ def create_candlestick_chart(data, date, timeframe):
     plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/{date_str}_{timeframe}.png')
 
 # Example usage
-date_to_plot = '2023-01-27'  # Change this to the date you want to plot
-timeframe_to_plot = '15min'  # Change this to the desired timeframe
-create_candlestick_chart(historical_data, date_to_plot, timeframe_to_plot)
+#date_to_plot = '2023-01-27'  # Change this to the date you want to plot
+#timeframe_to_plot = '15min'  # Change this to the desired timeframe
+#create_candlestick_chart(historical_data, date_to_plot, timeframe_to_plot)
