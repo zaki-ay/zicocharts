@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pandas as pd
 
-#BASE_USER = 'homer'
-BASE_USER = 'zicocharts'
+BASE_USER = 'homer'
+#BASE_USER = 'zicocharts'
     
 def fetch_financial_data(ticker, start_date, end_date, interval):
     """Fetches financial data for a given ticker and date range."""

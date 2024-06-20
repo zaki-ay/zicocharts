@@ -8,8 +8,8 @@ from datetime import date
 app = Flask(__name__)
 PREDICTION_FILES = None
 
-#BASE_USER = 'homer'
-BASE_USER = 'zicocharts'
+BASE_USER = 'homer'
+#BASE_USER = 'zicocharts'
     
 def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicocharts/data/dates.csv'):
     # Step 1: Read the CSV file and create a dictionary mapping from number to date
@@ -24,7 +24,7 @@ def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicochar
     for filename in filenames:
         # Extract the number part from the filename (assuming the format is always number_filename.png)
         number = filename.split('_')[1].split('.')[0]
-        print(number)
+
         # Find the corresponding date in the dictionary
         corresponding_date = number_to_date.get(number)
         if corresponding_date:
@@ -43,12 +43,12 @@ def submit():
     DATE_INPUTTED = date.today().isoformat()
     CUTOFF_TIME = '12:00' #request.form['cutoff_time']
     TICKER = '^GSPC' #request.form['ticker']
-    WINDOW_SIZE = 5 #int(request.form['window_size'])
+    WINDOW_SIZE = 2 #int(request.form['window_size'])
     MODEL_CUTOFF_TIME = '1200' #request.form['cutoff_time'].replace(':', '')
 
     INPUT_IMAGE = f'/home/{BASE_USER}/zicocharts/tmp/input.png'
     FEATURES_FILE = f'/home/{BASE_USER}/zicocharts/models/{MODEL_CUTOFF_TIME}_{TIMEFRAME}_vgg.pkl'
-    DEFAULT_K_NEIGHBORS = 10
+    DEFAULT_K_NEIGHBORS = 50
 
     analyze_and_plot_specific_day(TICKER, DATE_INPUTTED, WINDOW_SIZE, TIMEFRAME, f"{DATE_INPUTTED} {CUTOFF_TIME}")
     PREDICTION_FILES = run_model(FEATURES_FILE, INPUT_IMAGE, DEFAULT_K_NEIGHBORS)  # Always use k-neighbors=50 for prediction
@@ -67,8 +67,9 @@ def submit():
 
     for pred in PRED_DATES:
         print(pred)
-        create_candlestick_chart(historical_data, pred, '15min')
+        create_candlestick_chart(historical_data, pred, f'{TIMEFRAME}min')
 
+    plot_todays_chart(TICKER, f'{TIMEFRAME}m')
     return jsonify()
 
 if __name__ == "__main__":

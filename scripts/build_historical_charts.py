@@ -1,9 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import mplfinance as mpf
+import yfinance as yf
+import datetime
 
-#BASE_USER = "homer"
-BASE_USER = "zicocharts"
+BASE_USER = "homer"
+#BASE_USER = "zicocharts"
 
 # Load historical data
 # data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
@@ -37,6 +39,32 @@ def create_candlestick_chart(data, date, timeframe):
     # Plot the candlestick chart
     mpf.plot(resampled_data, type='candle', style='charles', title=f'Candlestick chart for {date_str} at {timeframe}', ylabel='Price')
     plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/{date_str}_{timeframe}.png')
+
+def plot_todays_chart(ticker, timeframe, cutoff_time=None):
+    # Get today's date
+    today = datetime.datetime.now().date()
+
+    # Determine the end time for data fetching
+    if cutoff_time:
+        end_time = datetime.datetime.strptime(f'{today} {cutoff_time}', '%Y-%m-%d %H:%M')
+    else:
+        end_time = datetime.datetime.combine(today, datetime.time.max)
+    
+    # Fetch data for today from yfinance
+    data = yf.download(ticker, start=today, end=end_time, interval=timeframe)
+    
+    if data.empty:
+        print(f"No data available for today: {today} for the ticker: {ticker}")
+        return
+
+    # Check if there is sufficient data to plot
+    if 'Open' not in data.columns:
+        print("Incomplete data received, cannot plot chart.")
+        return
+    
+    # Plot the candlestick chart
+    mpf.plot(data, type='candle', style='charles', title=f'Today\'s Candlestick chart for {ticker} at {timeframe}', ylabel='Price')
+    plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/current_{today}_{timeframe}.png')
 
 # Example usage
 #date_to_plot = '2023-01-27'  # Change this to the date you want to plot
