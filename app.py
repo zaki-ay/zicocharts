@@ -66,7 +66,8 @@ def submit():
     PRED_DATES = map_filenames_to_dates(PREDICTION_FILES)
 
     for pred in PRED_DATES:
-        create_candlestick_chart(historical_data,pred,'15min')
+        print(pred)
+        create_candlestick_chart(historical_data, pred, '15min')
 
     return jsonify()
 
