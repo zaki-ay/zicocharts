@@ -2,8 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 
+#BASE_USER = "homer"
+BASE_USER = "zicocharts"
+
 # Load historical data
-data_file = 'data/cleaned_data.csv'
+data_file = '/home/{BASE_USER}/zicocharts/data/data.csv'
 historical_data = pd.read_csv(data_file)
 
 # Ensure the Timestamp column is in datetime format
