@@ -6,11 +6,11 @@ BASE_USER = "homer"
 #BASE_USER = "zicocharts"
 
 # Load historical data
-data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
-historical_data = pd.read_csv(data_file)
+# data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
+# historical_data = pd.read_csv(data_file)
 
-# Ensure the Timestamp column is in datetime format
-historical_data['Timestamp'] = pd.to_datetime(historical_data['Timestamp'])
+# # Ensure the Timestamp column is in datetime format
+# historical_data['Timestamp'] = pd.to_datetime(historical_data['Timestamp'])
 
 # Function to create candlestick chart for a given date and timeframe
 def create_candlestick_chart(data, date, timeframe):

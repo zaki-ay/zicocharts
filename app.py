@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, send_from_directory, jsonify
 import os, csv
 from scripts.fetch_plot import *
 from scripts.model import *
+from scripts.build_historical_charts import *
 from datetime import date
 
 app = Flask(__name__)
@@ -47,7 +48,7 @@ def submit():
 
     INPUT_IMAGE = f'/home/{BASE_USER}/zicocharts/tmp/input.png'
     FEATURES_FILE = f'/home/{BASE_USER}/zicocharts/models/{MODEL_CUTOFF_TIME}_{TIMEFRAME}_vgg.pkl'
-    DEFAULT_K_NEIGHBORS = 50
+    DEFAULT_K_NEIGHBORS = 10
 
     analyze_and_plot_specific_day(TICKER, DATE_INPUTTED, WINDOW_SIZE, TIMEFRAME, f"{DATE_INPUTTED} {CUTOFF_TIME}")
     PREDICTION_FILES = run_model(FEATURES_FILE, INPUT_IMAGE, DEFAULT_K_NEIGHBORS)  # Always use k-neighbors=50 for prediction
@@ -56,7 +57,18 @@ def submit():
     with open(f'/home/{BASE_USER}/zicocharts/tmp/prediction_files.txt', 'w') as f:
         f.write('\n'.join(PREDICTION_FILES))
 
-    return jsonify(map_filenames_to_dates(PREDICTION_FILES))
+    data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
+    historical_data = pd.read_csv(data_file)
+
+    # Ensure the Timestamp column is in datetime format
+    historical_data['Timestamp'] = pd.to_datetime(historical_data['Timestamp'])
+
+    PRED_DATES = map_filenames_to_dates(PREDICTION_FILES)
+
+    for pred in PRED_DATES:
+        create_candlestick_chart(historical_data,pred,'15min')
+
+    return jsonify()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
