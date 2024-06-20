@@ -44,7 +44,7 @@ def plot_data_for_specific_day(data, specific_day, y_min, y_max, cutoff_time):
     else:
         print(f"No trading data available for {specific_day}.")
 
-    plt.savefig(f'/home/{app.BASE_USER}/zicocharts/tmp/input.png', transparent=True)
+    plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/input.png', transparent=True)
     plt.close()
 
 def analyze_and_plot_specific_day(ticker, specific_day, window_size, timeframe, cutoff_time=None):
