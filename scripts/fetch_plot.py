@@ -2,8 +2,10 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pandas as pd
-from .. import app
 
+#BASE_USER = 'homer'
+BASE_USER = 'zicocharts'
+    
 def fetch_financial_data(ticker, start_date, end_date, interval):
     """Fetches financial data for a given ticker and date range."""
     spx = yf.Ticker(ticker)
