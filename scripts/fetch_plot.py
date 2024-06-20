@@ -2,6 +2,7 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pandas as pd
+from app import BASE_USER
 
 def fetch_financial_data(ticker, start_date, end_date, interval):
     """Fetches financial data for a given ticker and date range."""
@@ -41,7 +42,7 @@ def plot_data_for_specific_day(data, specific_day, y_min, y_max, cutoff_time):
     else:
         print(f"No trading data available for {specific_day}.")
 
-    plt.savefig('/home/zicocharts/zicocharts/input.png', transparent=True)
+    plt.savefig(f'/home/{BASE_USER}/zicocharts/input.png', transparent=True)
     plt.close()
 
 def analyze_and_plot_specific_day(ticker, specific_day, window_size, timeframe, cutoff_time=None):

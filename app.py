@@ -7,8 +7,8 @@ from datetime import date
 app = Flask(__name__)
 PREDICTION_FILES = None
 
-#BASE_USER = 'homer'
-BASE_USER = 'zicocharts'
+BASE_USER = 'homer'
+#BASE_USER = 'zicocharts'
 
 def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicocharts/data/dates.csv'):
     # Step 1: Read the CSV file and create a dictionary mapping from number to date
