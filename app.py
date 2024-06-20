@@ -9,7 +9,7 @@ PREDICTION_FILES = None
 
 #BASE_USER = 'homer'
 BASE_USER = 'zicocharts'
-
+    
 def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicocharts/data/dates.csv'):
     # Step 1: Read the CSV file and create a dictionary mapping from number to date
     number_to_date = {}
@@ -47,7 +47,6 @@ def submit():
 
     INPUT_IMAGE = f'/home/{BASE_USER}/zicocharts/tmp/input.png'
     FEATURES_FILE = f'/home/{BASE_USER}/zicocharts/models/{MODEL_CUTOFF_TIME}_{TIMEFRAME}_vgg.pkl'
-    #BASE_IMG_DIR = '/home/zicocharts/zicocharts/images/plots/'
     DEFAULT_K_NEIGHBORS = 50
 
     analyze_and_plot_specific_day(TICKER, DATE_INPUTTED, WINDOW_SIZE, TIMEFRAME, f"{DATE_INPUTTED} {CUTOFF_TIME}")
