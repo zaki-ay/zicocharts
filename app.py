@@ -7,8 +7,8 @@ from datetime import date
 app = Flask(__name__)
 PREDICTION_FILES = None
 
-BASE_USER = 'homer'
-#BASE_USER = 'zicocharts'
+#BASE_USER = 'homer'
+BASE_USER = 'zicocharts'
 
 def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicocharts/data/dates.csv'):
     # Step 1: Read the CSV file and create a dictionary mapping from number to date
@@ -45,7 +45,7 @@ def submit():
     WINDOW_SIZE = 5 #int(request.form['window_size'])
     MODEL_CUTOFF_TIME = '1200' #request.form['cutoff_time'].replace(':', '')
 
-    INPUT_IMAGE = f'/home/{BASE_USER}/zicocharts/input.png'
+    INPUT_IMAGE = f'/home/{BASE_USER}/zicocharts/tmp/input.png'
     FEATURES_FILE = f'/home/{BASE_USER}/zicocharts/models/{MODEL_CUTOFF_TIME}_{TIMEFRAME}_vgg.pkl'
     #BASE_IMG_DIR = '/home/zicocharts/zicocharts/images/plots/'
     DEFAULT_K_NEIGHBORS = 50
@@ -54,7 +54,7 @@ def submit():
     PREDICTION_FILES = run_model(FEATURES_FILE, INPUT_IMAGE, DEFAULT_K_NEIGHBORS)  # Always use k-neighbors=50 for prediction
 
     # Save prediction files list to allow re-merging without re-predicting
-    with open(f'/home/{BASE_USER}/zicocharts/prediction_files.txt', 'w') as f:
+    with open(f'/home/{BASE_USER}/zicocharts/tmp/prediction_files.txt', 'w') as f:
         f.write('\n'.join(PREDICTION_FILES))
 
     return jsonify(map_filenames_to_dates(PREDICTION_FILES))
