@@ -38,7 +38,7 @@ def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicochar
 def submit():
     #DATA_FINENESS = int(request.form['data_fineness'])
     #USER_K_NEIGHBORS = int(request.form['k_neighbors'])  # User's k-neighbors for image merging
-    TIMEFRAME = 30 #int(request.form['timeframe'])
+    TIMEFRAME = 15 #int(request.form['timeframe'])
     DATE_INPUTTED = date.today().isoformat()
     CUTOFF_TIME = '12:00' #request.form['cutoff_time']
     TICKER = '^GSPC' #request.form['ticker']
