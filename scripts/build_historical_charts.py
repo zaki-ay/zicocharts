@@ -37,8 +37,14 @@ def create_candlestick_chart(data, date, timeframe):
     }).dropna()  # Drop rows with NaN values which result from no data being available in the period
     
     # Plot the candlestick chart
-    mpf.plot(resampled_data, type='candle', style='charles', title=f'Candlestick chart for {date_str} at {timeframe}', ylabel='Price')
-    plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/{date_str}_{timeframe}.png')
+    mpf.plot(
+        resampled_data,
+        type='candle',
+        style='charles',
+        ylabel='Price',
+        title='',  # No title
+        savefig=dict(fname=f'/home/{BASE_USER}/zicocharts/tmp/{date_str}_{timeframe}.png', dpi=300, bbox_inches='tight')  # Save with higher DPI and full view
+    )
 
 def plot_todays_chart(ticker, timeframe, cutoff_time=None):
     # Get today's date
