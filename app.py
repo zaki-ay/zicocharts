@@ -45,7 +45,7 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     clear_tmp_directory()
-    
+
     TIMEFRAME = 15
     DATE_INPUTTED = date.today().isoformat()
     CUTOFF_TIME = '12:00'
@@ -73,7 +73,7 @@ def submit():
         create_candlestick_chart(historical_data, pred, f'{TIMEFRAME}min')
 
     plot_todays_chart(TICKER, f'{TIMEFRAME}m')
-
+    os.unlink(f'/home/{BASE_USER}/zicocharts/tmp/input.png')
     return redirect(url_for('index'))
 
 @app.route('/tmp/<filename>')
