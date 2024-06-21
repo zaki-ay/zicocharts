@@ -1,12 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ZicoCharts v0.1</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
     <style>
+        #imageDisplay { width: 100%; height: auto; }
+        .arrow { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); font-size: 24px; color: black; background-color: white; border: none; padding: 10px; border-radius: 50%; }
+        .left-arrow { left: 10px; }
+        .right-arrow { right: 10px; }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
     </style>
-  </head>
-  <body>
-  </body>
+</head>
+<body>
+    <div>
+        <button class="arrow left-arrow" onclick="changeImage(-1)">&#10094;</button>
+        <img id="imageDisplay" src="{{ images[0] | safe }}" alt="Image display">
+        <button class="arrow right-arrow" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <script>
+        let images = {{ images | tojson | safe }};
+        let currentIndex = 0;
+        
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex >= images.length) currentIndex = 0;
+            else if (currentIndex < 0) currentIndex = images.length - 1;
+            document.getElementById('imageDisplay').src = images[currentIndex];
+        }
+    </script>
+</body>
 </html>
