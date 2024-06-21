@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, redirect, url_for
+from flask import Flask, render_template, send_from_directory, redirect, url_for, request
 import os, csv
 from datetime import date
 from scripts.fetch_plot import analyze_and_plot_specific_day
@@ -8,7 +8,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# BASE_USER = 'homer'
+#BASE_USER = 'homer'
 BASE_USER = 'zicocharts'
 
 def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicocharts/data/dates.csv'):
@@ -28,7 +28,8 @@ def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicochar
 @app.route('/')
 def index():
     image_folder = f'/home/{BASE_USER}/zicocharts/tmp/'
-    images = [os.path.join('/images', file) for file in os.listdir(image_folder) if file.endswith(('.png', '.jpg', '.jpeg'))]
+    images = [file for file in os.listdir(image_folder) if file.endswith(('.png', '.jpg', '.jpeg'))]
+    images = [f'/tmp/{file}' for file in images]
     return render_template('index.html', images=images)
 
 @app.route('/submit', methods=['POST'])
@@ -63,9 +64,9 @@ def submit():
 
     return redirect(url_for('index'))
 
-@app.route('/images/<filename>')
+@app.route('/tmp/<filename>')
 def send_image(filename):
-    return send_from_directory('/home/homer/zicocharts/tmp/', filename)
+    return send_from_directory(f'/home/{BASE_USER}/zicocharts/tmp/', filename)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
