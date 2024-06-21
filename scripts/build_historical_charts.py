@@ -39,7 +39,7 @@ def create_candlestick_chart(data, date, timeframe):
     # Plot the candlestick chart
     mpf.plot(
         resampled_data,
-        type='candle',
+        type='line',
         style='charles',
         ylabel='Price',
         title='',  # No title
