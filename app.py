@@ -11,6 +11,16 @@ app = Flask(__name__)
 #BASE_USER = 'homer'
 BASE_USER = 'zicocharts'
 
+def clear_tmp_directory():
+    tmp_dir = f'/home/{BASE_USER}/zicocharts/tmp/'
+    for file in os.listdir(tmp_dir):
+        file_path = os.path.join(tmp_dir, file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(f'Error deleting file {file_path}: {e}')
+
 def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicocharts/data/dates.csv'):
     number_to_date = {}
     with open(csv_file_path, mode='r', newline='') as csvfile:
@@ -34,6 +44,8 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
+    clear_tmp_directory()
+    
     TIMEFRAME = 15
     DATE_INPUTTED = date.today().isoformat()
     CUTOFF_TIME = '12:00'
