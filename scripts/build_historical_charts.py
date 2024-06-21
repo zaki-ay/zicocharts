@@ -4,15 +4,8 @@ import mplfinance as mpf
 import yfinance as yf
 import datetime
 
-BASE_USER = "homer"
-#BASE_USER = "zicocharts"
-
-# Load historical data
-# data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
-# historical_data = pd.read_csv(data_file)
-
-# # Ensure the Timestamp column is in datetime format
-# historical_data['Timestamp'] = pd.to_datetime(historical_data['Timestamp'])
+#BASE_USER = "homer"
+BASE_USER = "zicocharts"
 
 # Function to create candlestick chart for a given date and timeframe
 def create_candlestick_chart(data, date, timeframe):
@@ -69,7 +62,13 @@ def plot_todays_chart(ticker, timeframe, cutoff_time=None):
         return
     
     # Plot the candlestick chart
-    mpf.plot(data, type='candle', style='charles', title=f'Today\'s Candlestick chart for {ticker} at {timeframe}', ylabel='Price')
+    plt.figure(figsize=(10, 6))
+    plt.plot(data['Close'], color='black')
+    plt.title('Today')
+    plt.ylabel('Price')
+    plt.xlim([data.index[0], data.index[-1]])
+    plt.tight_layout()
+    plt.axis('off')
     plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/current.png')
 
 # Example usage

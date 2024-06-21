@@ -1,5 +1,5 @@
-from flask import Flask, render_template, send_from_directory, redirect, url_for, request
-import os, csv
+from flask import Flask, render_template, send_from_directory, redirect, url_for, request, Response
+import os, csv, requests
 from datetime import date
 from scripts.fetch_plot import analyze_and_plot_specific_day
 from scripts.model import run_model
@@ -8,8 +8,8 @@ import pandas as pd
 
 app = Flask(__name__)
 
-BASE_USER = 'homer'
-#BASE_USER = 'zicocharts'
+#BASE_USER = 'homer'
+BASE_USER = 'zicocharts'
 
 def clear_tmp_directory():
     tmp_dir = f'/home/{BASE_USER}/zicocharts/tmp/'
@@ -63,17 +63,23 @@ def submit():
     with open(f'/home/{BASE_USER}/zicocharts/tmp/prediction_files.txt', 'w') as f:
         f.write('\n'.join(PREDICTION_FILES))
 
-    data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
-    historical_data = pd.read_csv(data_file)
-    historical_data['Timestamp'] = pd.to_datetime(historical_data['Timestamp'])
-
-    PRED_DATES = map_filenames_to_dates(PREDICTION_FILES)
-
-    for pred in PRED_DATES:
-        create_candlestick_chart(historical_data, pred, f'{TIMEFRAME}min')
-
     plot_todays_chart(TICKER, f'{TIMEFRAME}m')
-    os.unlink(f'/home/{BASE_USER}/zicocharts/tmp/input.png')
+    #os.unlink(f'/home/{BASE_USER}/zicocharts/tmp/input.png')
+
+    # Fetch and save images from the URL
+    BASE_URL = 'https://zaki-ay.github.io/zicocharts_images/plots/'
+    tmp_dir = f'/home/{BASE_USER}/zicocharts/tmp/'
+
+    for filename in PREDICTION_FILES:
+        image_url = f'{BASE_URL}{filename}'
+        response = requests.get(image_url)
+
+        if response.status_code == 200:
+            with open(os.path.join(tmp_dir, filename), 'wb') as f:
+                f.write(response.content)
+        else:
+            print(f"Error fetching image {filename}: {response.status_code}")
+
     return redirect(url_for('index'))
 
 @app.route('/tmp/<filename>')
