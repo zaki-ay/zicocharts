@@ -65,12 +65,29 @@
         .right-arrow {
             right: 10px;
         }
+        .submit-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: linear-gradient(to bottom, #ffffe0, #ccffcc);
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background: linear-gradient(to bottom, #ccffcc, #ffffe0);
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Image Carousel</h1>
     </div>
+
+    <form action="/submit" method="post">
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
 
     <div class="carousel">
         <button class="arrow left-arrow" onclick="changeImage(-1)">
