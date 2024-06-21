@@ -8,8 +8,8 @@ import pandas as pd
 
 app = Flask(__name__)
 
-#BASE_USER = 'homer'
-BASE_USER = 'zicocharts'
+BASE_USER = 'homer'
+#BASE_USER = 'zicocharts'
 
 def clear_tmp_directory():
     tmp_dir = f'/home/{BASE_USER}/zicocharts/tmp/'
@@ -55,7 +55,7 @@ def submit():
 
     INPUT_IMAGE = f'/home/{BASE_USER}/zicocharts/tmp/input.png'
     FEATURES_FILE = f'/home/{BASE_USER}/zicocharts/models/{MODEL_CUTOFF_TIME}_{TIMEFRAME}_vgg.pkl'
-    DEFAULT_K_NEIGHBORS = 50
+    DEFAULT_K_NEIGHBORS = 10
 
     analyze_and_plot_specific_day(TICKER, DATE_INPUTTED, WINDOW_SIZE, TIMEFRAME, f"{DATE_INPUTTED} {CUTOFF_TIME}")
     PREDICTION_FILES = run_model(FEATURES_FILE, INPUT_IMAGE, DEFAULT_K_NEIGHBORS)

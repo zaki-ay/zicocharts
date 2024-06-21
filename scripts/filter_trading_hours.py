@@ -1,4 +1,5 @@
 import pandas as pd
+import sys
 
 def filter_by_trading_hours(file_path, output_path):
     # Load the data from CSV file
@@ -18,8 +19,8 @@ def filter_by_trading_hours(file_path, output_path):
     print("Filtered data has been saved to:", output_path)
 
 # Specify the path to the input and output files
-input_file_path = '../data/cleaned_data.csv'
-output_file_path = '../data/data.csv'
+input_file_path = sys.argv[1]
+output_file_path = 'new.csv'
 
 # Run the function
 filter_by_trading_hours(input_file_path, output_file_path)
