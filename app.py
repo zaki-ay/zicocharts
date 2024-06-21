@@ -50,7 +50,7 @@ def submit():
     DATE_INPUTTED = date.today().isoformat()
     CUTOFF_TIME = '12:00'
     TICKER = '^GSPC'
-    WINDOW_SIZE = 2
+    WINDOW_SIZE = 5
     MODEL_CUTOFF_TIME = '1200'
 
     INPUT_IMAGE = f'/home/{BASE_USER}/zicocharts/tmp/input.png'
