@@ -8,7 +8,8 @@ import pandas as pd
 
 app = Flask(__name__)
 
-BASE_USER = 'homer'  # or 'zicocharts', based on your configuration
+#BASE_USER = 'homer'
+BASE_USER = 'zicocharts'
 
 def map_filenames_to_dates(filenames, csv_file_path=f'/home/{BASE_USER}/zicocharts/data/dates.csv'):
     number_to_date = {}
@@ -50,7 +51,6 @@ def submit():
     PRED_DATES = map_filenames_to_dates(PREDICTION_FILES)
 
     for pred in PRED_DATES:
-        print(pred)
         create_candlestick_chart(historical_data, pred, f'{TIMEFRAME}min')
 
     plot_todays_chart(TICKER, f'{TIMEFRAME}m')

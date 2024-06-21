@@ -4,8 +4,8 @@ import mplfinance as mpf
 import yfinance as yf
 import datetime
 
-BASE_USER = "homer"
-#BASE_USER = "zicocharts"
+#BASE_USER = "homer"
+BASE_USER = "zicocharts"
 
 # Load historical data
 # data_file = f'/home/{BASE_USER}/zicocharts/data/data.csv'
@@ -64,7 +64,7 @@ def plot_todays_chart(ticker, timeframe, cutoff_time=None):
     
     # Plot the candlestick chart
     mpf.plot(data, type='candle', style='charles', title=f'Today\'s Candlestick chart for {ticker} at {timeframe}', ylabel='Price')
-    plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/current_{today}_{timeframe}.png')
+    plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/current.png')
 
 # Example usage
 #date_to_plot = '2023-01-27'  # Change this to the date you want to plot
