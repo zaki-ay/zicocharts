@@ -47,7 +47,7 @@ def submit():
     clear_tmp_directory()
 
     TIMEFRAME = 15
-    DATE_INPUTTED = date.today().isoformat()
+    DATE_INPUTTED = '2024-06-20'
     CUTOFF_TIME = '12:00'
     TICKER = '^GSPC'
     WINDOW_SIZE = 2
