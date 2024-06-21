@@ -1,1 +1,4 @@
 models/*.pkl
+tmp/*.png
+tmp/*.csv
+tmp/*.txt
