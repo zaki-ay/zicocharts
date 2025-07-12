@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pandas as pd
 
-#BASE_USER = 'homer'
-BASE_USER = 'zicocharts'
-    
+BASE_USER = "zicofinance/zicofinance"
+#BASE_USER = "homer/zcharts"
+
 def fetch_financial_data(ticker, start_date, end_date, interval):
     """Fetches financial data for a given ticker and date range."""
     spx = yf.Ticker(ticker)
@@ -44,7 +44,7 @@ def plot_data_for_specific_day(data, specific_day, y_min, y_max, cutoff_time):
     else:
         print(f"No trading data available for {specific_day}.")
 
-    plt.savefig(f'/home/{BASE_USER}/zicocharts/tmp/input.png', transparent=True)
+    plt.savefig(f'/home/{BASE_USER}/tmp/input.png', transparent=True)
     plt.close()
 
 def analyze_and_plot_specific_day(ticker, specific_day, window_size, timeframe, cutoff_time=None):
@@ -83,3 +83,5 @@ def analyze_and_plot_specific_day(ticker, specific_day, window_size, timeframe, 
 
     # Plot data for the specific day up to the cutoff time
     plot_data_for_specific_day(specific_day_data, specific_day, min_price, max_price, cutoff_time)
+
+analyze_and_plot_specific_day('^GSPC', '2024-10-09', 5, 15)

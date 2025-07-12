@@ -1,7 +1,5 @@
-import os, sys
-import pickle
 import numpy as np
-import json
+import json, gzip, os, sys, pickle
 import matplotlib.pyplot as plt
 from PIL import Image
 from tensorflow.keras.applications import VGG16
@@ -23,7 +21,7 @@ def extract_features(image_path):
     return features.flatten()
 
 def load_data(filename):
-    with open(filename, 'rb') as f:
+    with gzip.open(filename, 'rb') as f:
         saved_data = pickle.load(f)
     return saved_data['features'], saved_data['image_files']
 

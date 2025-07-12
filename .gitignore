@@ -1,4 +1,11 @@
-models/*.pkl
-tmp/*.png
-tmp/*.csv
-tmp/*.txt
+models/
+tmp/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.gz
+*.cpython-312.pyc
+scripts/__pycache__/fetch_plot.cpython-312.pyc
+scripts/__pycache__/model.cpython-312.pyc
+
