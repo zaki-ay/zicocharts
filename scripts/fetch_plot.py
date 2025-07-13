@@ -2,9 +2,13 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pandas as pd
+import platform
 
-BASE_USER = "zicofinance/zicofinance"
-#BASE_USER = "homer/zcharts"
+if platform.system() == "Windows":
+    BASE_USER = r"C:\Users\za-yah\OneDrive - Sectra\Documents\zicocharts"
+else:
+    BASE_USER = "/home/zicocharts/zicocharts"
+
 
 def fetch_financial_data(ticker, start_date, end_date, interval):
     """Fetches financial data for a given ticker and date range."""

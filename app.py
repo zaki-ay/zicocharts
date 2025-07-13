@@ -1,12 +1,17 @@
 from flask import Flask, request, render_template, send_from_directory, jsonify
-import os
 from scripts.fetch_plot import *
 from scripts.model import *
 from scripts.handle_images import *
+import platform
 
 app = Flask(__name__)
 PREDICTION_FILES = None
-BASE_USER = "/home/zicocharts/zicocharts"
+
+if platform.system() == "Windows":
+    BASE_USER = r"C:\Users\za-yah\OneDrive - Sectra\Documents\zicocharts"
+else:
+    BASE_USER = "/home/zicocharts/zicocharts"
+
 BASE_IMG_DIR = f"{BASE_USER}/tmp"
 
 @app.route('/')

@@ -1,385 +1,423 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>ZicoCorp – Pattern-Based Market Forecasting Demo</title>
-  <!-- Google Fonts – elegant literary style -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- App-specific styles -->
-  <style>
-    /* PALETTE */
-    :root{
-      --bg:          #f6f4f0;   /* subtle beige */
-      --bg-alt:      #efe9e1;   /* slightly deeper beige for hero */
-      --primary:     #3e6f8e;   /* muted blue-green accent */
-      --card-bg:     #ffffff;
-      --text:        #333;
-    }
-    /* GLOBAL */
-    html,body{background:var(--bg);color:var(--text);}
-    body{
-      font-family:"Inter", Roboto, Helvetica, Arial, sans-serif;
-      font-weight:300;
-    }
-    h1,h2,h3,h4{font-weight:600;}
-    .blurred{filter:blur(5px);}
-    .hidden{display:none;}
-    /* QUOTE SECTION */
-    .quote-section{
-      background:var(--bg);
-      padding:40px 15px 20px;
-      text-align:center;
-    }
-    .quote-section h2{
-      font-family:'Playfair Display', serif;
-      font-size:1.75rem;
-      font-weight:600;
-      letter-spacing:.02em;
-      color:var(--primary);
-    }
-    /* LOADER */
-    .loader{
-      border:12px solid #f3f3f3;border-radius:50%;
-      border-top:12px solid var(--primary);
-      width:90px;height:90px;
-      animation:spin .9s linear infinite;
-      position:fixed;top:50%;left:50%;
-      transform:translate(-50%,-50%);z-index:2000;
-    }
-    @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-    /* HERO */
-    .jumbotron{
-      background:var(--bg-alt);
-      border-radius:0;
-    }
-    .section-divider{
-      width:60px;height:4px;background:var(--primary);border-radius:10px;margin:20px auto;
-    }
-    /* CARDS */
-    .card{
-      background:var(--card-bg);
-      border:none;
-      border-radius:.75rem;
-    }
-    .card img{max-height:340px;object-fit:contain}
-    /* FOOTER */
-    footer{
-      background:#3d3d3a;
-      color:#ddd;font-size:.85rem;
-    }
-    footer a{color:#ddd;}
-    /* TOOLTIP OVERRIDE */
-    .tooltip-inner{background:var(--primary);}
-    .arrow::before{border-top-color:var(--primary);}
-  </style>
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>ZicoCorp – Pattern-Based Market Forecasting Demo</title>
+        <!-- Google Fonts – elegant literary style -->
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <!-- Flatpickr CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+        <!-- App-specific styles -->
+        <style>
+            /* PALETTE */
+            :root {
+                --bg: #f6f4f0; /* subtle beige */
+                --bg-alt: #efe9e1; /* slightly deeper beige for hero */
+                --primary: #3e6f8e; /* muted blue-green accent */
+                --card-bg: #ffffff;
+                --text: #333;
+            }
+            /* GLOBAL */
+            html,
+            body {
+                background: var(--bg);
+                color: var(--text);
+            }
+            body {
+                font-family: "Inter", Roboto, Helvetica, Arial, sans-serif;
+                font-weight: 300;
+            }
+            h1,
+            h2,
+            h3,
+            h4 {
+                font-weight: 600;
+            }
+            .blurred {
+                filter: blur(5px);
+            }
+            .hidden {
+                display: none;
+            }
+            /* QUOTE SECTION */
+            .quote-section {
+                background: var(--bg);
+                padding: 40px 15px 20px;
+                text-align: center;
+            }
+            .quote-section h2 {
+                font-family: "Playfair Display", serif;
+                font-size: 1.75rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                color: var(--primary);
+            }
+            /* LOADER */
+            .loader {
+                border: 12px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 12px solid var(--primary);
+                width: 90px;
+                height: 90px;
+                animation: spin 0.9s linear infinite;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 2000;
+            }
+            @keyframes spin {
+                0% {
+                    transform: rotate(0);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            /* HERO */
+            .jumbotron {
+                background: var(--bg-alt);
+                border-radius: 0;
+            }
+            .section-divider {
+                width: 60px;
+                height: 4px;
+                background: var(--primary);
+                border-radius: 10px;
+                margin: 20px auto;
+            }
+            /* CARDS */
+            .card {
+                background: var(--card-bg);
+                border: none;
+                border-radius: 0.75rem;
+            }
+            .card img {
+                max-height: 340px;
+                object-fit: contain;
+            }
+            /* FOOTER */
+            footer {
+                background: #3d3d3a;
+                color: #ddd;
+                font-size: 0.85rem;
+            }
+            footer a {
+                color: #ddd;
+            }
+            /* TOOLTIP OVERRIDE */
+            .tooltip-inner {
+                background: var(--primary);
+            }
+            .arrow::before {
+                border-top-color: var(--primary);
+            }
+        </style>
+    </head>
 
-<body>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGBGB94R4J"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <body>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGBGB94R4J"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
 
-    gtag('config', 'G-VGBGB94R4J');
-  </script>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#3d3d3a">
-    <a class="navbar-brand font-weight-bold" href="#">ZicoCorp v2</a>
-  </nav>
-  <!-- LITERARY QUOTE -->
-  <section class="quote-section">
-    <h2>
-      History doesn’t <em>repeat</em>, but it <em>rhymes</em>.
-    </h2>
-  </section>
-  <!-- HERO / INTRO -->
-  <header class="jumbotron jumbotron-fluid mb-0 py-5">
-    <div class="container">
-      <h1 class="display-4">Pattern-Based Market Forecasting</h1>
-      <p class="lead mb-4">
-        This interactive demo showcases how ZicoCorp leverages image-based pattern matching
-        to anticipate short-term price movements.
-        Upload a date / ticker, we convert the intraday OHLC data into images, locate similar
-        historical patterns using a deep-learning image search (VGG net + k-NN),
-        and blend the top matches into a directional forecast.
-      </p>
-      <ul class="mb-0">
-        <li>Step 1 – Configure your parameters and press <strong>Submit</strong>.</li>
-        <li>Step 2 – Review the input, merged and forecast images.</li>
-        <li>Step 3 – Adjust <em>K-Neighbours</em> or <em>Data Fineness</em>; the <em>Re-Merge</em> tool redraws instantly.</li>
-      </ul>
-    </div>
-  </header>
-  <!-- MAIN -->
-  <main class="container py-5">
-    <!-- API-LIMIT BANNER (auto-hide when back-end is available) -->
-    <div id="api-limit-banner"
-         class="alert alert-warning text-center font-weight-bold"
-         style="display:none">
-      We’ve temporarily hit the API limit for fetching stock data. Please try again
-      later. Thank you for your patience!
-    </div>
-    <!-- PARAMETERS FORM -->
-    <section id="parameter-section">
-      <h2 class="text-center">1. Configure Parameters</h2>
-      <div class="section-divider"></div>
-      <form id="data-form" class="bg-white border rounded-lg p-4 shadow-sm">
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="data_fineness" data-toggle="tooltip"
-                   title="Granularity used when connecting the prediction dots.">
-              Data Fineness
-            </label>
-            <input type="number" class="form-control" id="data_fineness"
-                   name="data_fineness" value="50" required>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="k_neighbors" data-toggle="tooltip"
-                   title="Number of nearest historical patterns used in the merge.">
-              K-Neighbours
-            </label>
-            <input type="number" class="form-control" id="k_neighbors"
-                   name="k_neighbors" value="1" required>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="window_size" data-toggle="tooltip"
-                   title="Number of historical bars to be converted into an image.">
-              Window Size
-            </label>
-            <input type="number" class="form-control" id="window_size"
-                   name="window_size" value="5" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <fieldset class="form-group col-md-5">
-            <legend class="col-form-label pt-0">Timeframe</legend>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"
-                     name="timeframe" id="timeframe5" value="5">
-              <label class="form-check-label" for="timeframe5">5 min</label>
+            gtag("config", "G-VGBGB94R4J");
+        </script>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background: #3d3d3a;">
+            <a class="navbar-brand font-weight-bold" href="#">ZicoCorp v2</a>
+        </nav>
+        <!-- LITERARY QUOTE -->
+        <section class="quote-section">
+            <h2>History doesn’t <em>repeat</em>, but it <em>rhymes</em>.</h2>
+        </section>
+        <!-- HERO / INTRO -->
+        <header class="jumbotron jumbotron-fluid mb-0 py-5">
+            <div class="container">
+                <h1 class="display-4">Pattern-Based Market Forecasting</h1>
+                <p class="lead mb-4">
+                    This interactive demo showcases how ZicoCorp leverages image-based pattern matching to anticipate short-term price movements. Upload a date / ticker, we convert the intraday OHLC data into images, locate similar
+                    historical patterns using a deep-learning image search (VGG net + k-NN), and blend the top matches into a directional forecast.
+                </p>
+                <p class="text-danger font-weight-bold">
+                    ⚠️ Please note: This tool is designed exclusively for intra-day forecasting. You must select the current day or any past day within the last 30 days. Dates outside this window will not work.
+                </p>
+                <ul class="mb-0">
+                    <li>Step 1 – Configure your parameters and press <strong>Submit</strong>.</li>
+                    <li>Step 2 – Review the input, merged and forecast images.</li>
+                    <li>Step 3 – Adjust <em>K-Neighbours</em> or <em>Data Fineness</em>; the <em>Re-Merge</em> tool redraws instantly.</li>
+                </ul>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"
-                     name="timeframe" id="timeframe15" value="15" checked>
-              <label class="form-check-label" for="timeframe15">15 min</label>
+        </header>
+
+        <!-- MAIN -->
+        <main class="container py-5">
+            <!-- API-LIMIT BANNER (auto-hide when back-end is available) -->
+            <div id="api-limit-banner" class="alert alert-warning text-center font-weight-bold" style="display: none;">
+                We’ve temporarily hit the API limit for fetching stock data. Please try again later. Thank you for your patience!
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"
-                     name="timeframe" id="timeframe30" value="30">
-              <label class="form-check-label" for="timeframe30">30 min</label>
+            <!-- PARAMETERS FORM -->
+            <section id="parameter-section">
+                <h2 class="text-center">1. Configure Parameters</h2>
+                <div class="section-divider"></div>
+                <form id="data-form" class="bg-white border rounded-lg p-4 shadow-sm">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="data_fineness" data-toggle="tooltip" title="Granularity used when connecting the prediction dots.">
+                                Data Fineness
+                            </label>
+                            <input type="number" class="form-control" id="data_fineness" name="data_fineness" value="50" required />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="k_neighbors" data-toggle="tooltip" title="Number of nearest historical patterns used in the merge.">
+                                K-Neighbours
+                            </label>
+                            <input type="number" class="form-control" id="k_neighbors" name="k_neighbors" value="1" required />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="window_size" data-toggle="tooltip" title="Number of historical bars to be converted into an image.">
+                                Window Size
+                            </label>
+                            <input type="number" class="form-control" id="window_size" name="window_size" value="5" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <fieldset class="form-group col-md-5">
+                            <legend class="col-form-label pt-0">Timeframe</legend>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="timeframe" id="timeframe5" value="5" />
+                                <label class="form-check-label" for="timeframe5">5 min</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="timeframe" id="timeframe15" value="15" checked />
+                                <label class="form-check-label" for="timeframe15">15 min</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="timeframe" id="timeframe30" value="30" />
+                                <label class="form-check-label" for="timeframe30">30 min</label>
+                            </div>
+                        </fieldset>
+                        <div class="form-group col-md-3">
+                            <label for="date_inputted">Date</label>
+                            <input type="text" class="form-control" id="date_inputted" name="date_inputted" required />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="cutoff_time">Cut-off Time</label>
+                            <select class="form-control" id="cutoff_time" name="cutoff_time" required>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="ticker">Ticker</label>
+                            <input type="text" class="form-control text-uppercase" id="ticker" name="ticker" value="^GSPC" required />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block" style="background: var(--primary); color: #fff;">
+                        Submit &nbsp;⟶
+                    </button>
+                </form>
+            </section>
+            <!-- RE-MERGE PANEL -->
+            <section id="remix-section" class="mt-5">
+                <h2 class="text-center">2. Fine-Tune the Blend</h2>
+                <div class="section-divider"></div>
+                <form id="remix-form" class="bg-white border rounded-lg p-4 shadow-sm blurred">
+                    <p class="small text-muted mb-4">
+                        Adjust the blend in real-time without re-running the prediction model.
+                    </p>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="remix_k_neighbors">K-Neighbours</label>
+                            <input type="number" class="form-control" id="remix_k_neighbors" name="k_neighbors" value="8" min="1" step="1" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="remix_data_fineness">Data Fineness</label>
+                            <input type="number" class="form-control" id="remix_data_fineness" name="data_fineness" value="1" min="1" step="1" required />
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- RESULTS  -->
+            <section id="results-section" class="images-section hidden mt-5">
+                <h2 class="text-center">3. Visual Results</h2>
+                <div class="section-divider"></div>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Input Image</h5>
+                                <img id="input-image" src="" alt="Input Image" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Merged Image</h5>
+                                <img id="merged-image" src="" alt="Merged Image" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Forecast Image</h5>
+                                <img id="prediction-image" src="" alt="Forecast Image" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Connected Image</h5>
+                                <img id="connected-image" src="" alt="Connected Image" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- LINE CHART -->
+            <!--<section class="mt-5">-->
+            <!--  <h2 class="text-center">4. Coordinate View</h2>-->
+            <!--  <div class="section-divider"></div>-->
+            <!--  <canvas id="myChart"></canvas>-->
+            <!--</section>-->
+        </main>
+        <!-- FOOTER -->
+        <footer class="py-4">
+            <div class="container text-center">
+                <p class="mb-1">© 2024 ZicoCorp. All rights reserved.</p>
+                <p class="mb-0">
+                    This prototype is for demonstration purposes only and does not constitute financial advice.
+                </p>
             </div>
-          </fieldset>
-          <div class="form-group col-md-3">
-            <label for="date_inputted">Date</label>
-            <input type="date" class="form-control" id="date_inputted"
-                   name="date_inputted" required>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="cutoff_time">Cut-off Time</label>
-            <select class="form-control" id="cutoff_time" name="cutoff_time" required>
-              <option value="11:00">11:00</option>
-              <option value="12:00">12:00</option>
-              <option value="13:00">13:00</option>
-              <option value="14:00">14:00</option>
-            </select>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="ticker">Ticker</label>
-            <input type="text" class="form-control text-uppercase"
-                   id="ticker" name="ticker" value="^GSPC" required>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-block"
-                style="background:var(--primary);color:#fff">
-          Submit &nbsp;⟶
-        </button>
-      </form>
-    </section>
-    <!-- RE-MERGE PANEL -->
-    <section id="remix-section" class="mt-5">
-      <h2 class="text-center">2. Fine-Tune the Blend</h2>
-      <div class="section-divider"></div>
-      <form id="remix-form" class="bg-white border rounded-lg p-4 shadow-sm blurred">
-        <p class="small text-muted mb-4">
-          Adjust the blend in real-time without re-running the prediction model.
-        </p>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="remix_k_neighbors">K-Neighbours</label>
-            <input type="number" class="form-control" id="remix_k_neighbors"
-                   name="k_neighbors" value="8" min="1" step="1" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="remix_data_fineness">Data Fineness</label>
-            <input type="number" class="form-control" id="remix_data_fineness"
-                   name="data_fineness" value="1" min="1" step="1" required>
-          </div>
-        </div>
-      </form>
-    </section>
-    <!-- RESULTS  -->
-    <section id="results-section" class="images-section hidden mt-5">
-      <h2 class="text-center">3. Visual Results</h2>
-      <div class="section-divider"></div>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">Input Image</h5>
-              <img id="input-image" src="" alt="Input Image" class="img-fluid">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">Merged Image</h5>
-              <img id="merged-image" src="" alt="Merged Image" class="img-fluid">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">Forecast Image</h5>
-              <img id="prediction-image" src="" alt="Forecast Image" class="img-fluid">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">Connected Image</h5>
-              <img id="connected-image" src="" alt="Connected Image" class="img-fluid">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- LINE CHART -->
-    <!--<section class="mt-5">-->
-    <!--  <h2 class="text-center">4. Coordinate View</h2>-->
-    <!--  <div class="section-divider"></div>-->
-    <!--  <canvas id="myChart"></canvas>-->
-    <!--</section>-->
-  </main>
-  <!-- FOOTER -->
-  <footer class="py-4">
-    <div class="container text-center">
-      <p class="mb-1">© 2024 ZicoCorp. All rights reserved.</p>
-      <p class="mb-0">
-        This prototype is for demonstration purposes only and does not constitute financial advice.
-      </p>
-    </div>
-  </footer>
-  <!-- LOADER -->
-  <div id="loader" class="loader hidden"></div>
-  <!-- SCRIPTS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- MAIN LOGIC -->
-  <script>
-  /* All JS waits until the DOM is fully loaded */
-  document.addEventListener("DOMContentLoaded", () => {
+        </footer>
+        <!-- LOADER -->
+        <div id="loader" class="loader hidden"></div>
+        <!-- SCRIPTS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Flatpickr JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            flatpickr("#date_inputted", {
+                dateFormat: "Y-m-d",
+                maxDate: "today",
+                disable: [
+                    function (date) {
+                        // Disable weekends (Saturday = 6, Sunday = 0)
+                        return date.getDay() === 0 || date.getDay() === 6;
+                    },
+                ],
+            });
+        </script>
 
-    /* ---------- INITIALISE TOOLTIP --------- */
-    $(function () {$('[data-toggle="tooltip"]').tooltip()});
+        <!-- MAIN LOGIC -->
+        <script>
+            /* All JS waits until the DOM is fully loaded */
+            document.addEventListener("DOMContentLoaded", () => {
+                /* ---------- INITIALISE TOOLTIP --------- */
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
 
-    /* ---------- DATE DEFAULT TO TODAY ------ */
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("date_inputted").value = today;
-    // sync initial values to remix
-    document.getElementById("remix_k_neighbors").value =
-        document.getElementById("k_neighbors").value;
-    document.getElementById("remix_data_fineness").value =
-        document.getElementById("data_fineness").value;
+                /* ---------- DATE DEFAULT TO TODAY ------ */
+                const today = new Date().toISOString().split("T")[0];
+                document.getElementById("date_inputted").value = today;
+                // sync initial values to remix
+                document.getElementById("remix_k_neighbors").value = document.getElementById("k_neighbors").value;
+                document.getElementById("remix_data_fineness").value = document.getElementById("data_fineness").value;
 
-    /* ---------- SUBMIT HANDLER -------------- */
-    document.getElementById("data-form")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-        toggleLoading(true);
-        fetch("/submit", {method: "POST", body: formData})
-          .then(r => r.json())
-          .then(renderImages)
-          .catch(err => console.error(err))
-          .finally(() => {
-            toggleLoading(false);
-            document.getElementById("remix-form").classList.remove("blurred");
-            document.getElementById("results-section").classList.remove("hidden");
-          });
-      });
+                /* ---------- SUBMIT HANDLER -------------- */
+                document.getElementById("data-form").addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    toggleLoading(true);
+                    fetch("/submit", { method: "POST", body: formData })
+                        .then((r) => r.json())
+                        .then(renderImages)
+                        .catch((err) => console.error(err))
+                        .finally(() => {
+                            toggleLoading(false);
+                            document.getElementById("remix-form").classList.remove("blurred");
+                            document.getElementById("results-section").classList.remove("hidden");
+                        });
+                });
 
-    /* ---------- REMIX FORM: block default submit ---------- */
-    document.getElementById("remix-form").addEventListener("submit", e => {
-      e.preventDefault();   /* stop full-page reload if user hits Enter */
-    });
+                /* ---------- REMIX FORM: block default submit ---------- */
+                document.getElementById("remix-form").addEventListener("submit", (e) => {
+                    e.preventDefault(); /* stop full-page reload if user hits Enter */
+                });
 
-    /* ---------- REMIX HANDLER --------------- */
-    ["remix_k_neighbors","remix_data_fineness"].forEach(id => {
-      document.getElementById(id).addEventListener("change", remixRequest);
-    });
-    function remixRequest(){
-      const form = document.getElementById("remix-form");
-      const formData = new FormData(form);
-      formData.append("data_fineness", document.getElementById("data_fineness").value);
-      toggleLoading(true);
-      fetch("/remix",{method:"POST",body:formData})
-        .then(r => r.json())
-        .then(renderImages)
-        .catch(err => console.error(err))
-        .finally(()=>toggleLoading(false));
-    }
+                /* ---------- REMIX HANDLER --------------- */
+                ["remix_k_neighbors", "remix_data_fineness"].forEach((id) => {
+                    document.getElementById(id).addEventListener("change", remixRequest);
+                });
+                function remixRequest() {
+                    const form = document.getElementById("remix-form");
+                    const formData = new FormData(form);
+                    formData.append("data_fineness", document.getElementById("data_fineness").value);
+                    toggleLoading(true);
+                    fetch("/remix", { method: "POST", body: formData })
+                        .then((r) => r.json())
+                        .then(renderImages)
+                        .catch((err) => console.error(err))
+                        .finally(() => toggleLoading(false));
+                }
 
-    /* ---------- HELPERS --------------------- */
-    function renderImages(data){
-      const ts = `?t=${Date.now()}`;
-      if(data.input_image)   document.getElementById("input-image").src   = `/images/${data.input_image}${ts}`;
-      if(data.merged_image)  document.getElementById("merged-image").src  = `/images/${data.merged_image}${ts}`;
-      if(data.prediction_image) document.getElementById("prediction-image").src = `/images/${data.prediction_image}${ts}`;
-      if(data.connected_image)  document.getElementById("connected-image").src  = `/images/${data.connected_image}${ts}`;
-    }
-    function toggleLoading(show){
-      document.querySelector("main").classList.toggle("blurred", show);
-      document.getElementById("loader").classList.toggle("hidden", !show);
-    }
+                /* ---------- HELPERS --------------------- */
+                function renderImages(data) {
+                    const ts = `?t=${Date.now()}`;
+                    if (data.input_image) document.getElementById("input-image").src = `/images/${data.input_image}${ts}`;
+                    if (data.merged_image) document.getElementById("merged-image").src = `/images/${data.merged_image}${ts}`;
+                    if (data.prediction_image) document.getElementById("prediction-image").src = `/images/${data.prediction_image}${ts}`;
+                    if (data.connected_image) document.getElementById("connected-image").src = `/images/${data.connected_image}${ts}`;
+                }
+                function toggleLoading(show) {
+                    document.querySelector("main").classList.toggle("blurred", show);
+                    document.getElementById("loader").classList.toggle("hidden", !show);
+                }
 
-    /* ---------- COORDINATE CHART ------------ */
-    fetch("/get_coordinates")
-      .then(r=>r.json())
-      .then(data=>{
-        const coords=(data.coordinates||[]).sort((a,b)=>a[0]-b[0]);
-        const ctx=document.getElementById("myChart").getContext("2d");
-        new Chart(ctx,{
-          type:"line",
-          data:{
-            datasets:[{
-              label:"Connected Path",
-              data:coords.map(c=>({x:c[0],y:c[1]})),
-              borderColor:"rgba(62,111,142,.9)",
-              tension:.1,pointRadius:0
-            }]
-          },
-          options:{
-            responsive:true,
-            scales:{x:{type:"linear",title:{display:true,text:"X"}},
-                    y:{type:"linear",reverse:true,title:{display:true,text:"Y"}}},
-            plugins:{zoom:{zoom:{wheel:{enabled:true},pinch:{enabled:true},mode:"xy"},
-                           pan:{enabled:true,mode:"xy"}}}
-          }
-        });
-      })
-      .catch(err=>console.error(err));
-
-  }); /* -------- END DOMContentLoaded --------- */
-  </script>
-</body>
+                /* ---------- COORDINATE CHART ------------ */
+                fetch("/get_coordinates")
+                    .then((r) => r.json())
+                    .then((data) => {
+                        const coords = (data.coordinates || []).sort((a, b) => a[0] - b[0]);
+                        const ctx = document.getElementById("myChart").getContext("2d");
+                        new Chart(ctx, {
+                            type: "line",
+                            data: {
+                                datasets: [
+                                    {
+                                        label: "Connected Path",
+                                        data: coords.map((c) => ({ x: c[0], y: c[1] })),
+                                        borderColor: "rgba(62,111,142,.9)",
+                                        tension: 0.1,
+                                        pointRadius: 0,
+                                    },
+                                ],
+                            },
+                            options: {
+                                responsive: true,
+                                scales: { x: { type: "linear", title: { display: true, text: "X" } }, y: { type: "linear", reverse: true, title: { display: true, text: "Y" } } },
+                                plugins: { zoom: { zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: "xy" }, pan: { enabled: true, mode: "xy" } } },
+                            },
+                        });
+                    })
+                    .catch((err) => console.error(err));
+            }); /* -------- END DOMContentLoaded --------- */
+        </script>
+    </body>
 </html>

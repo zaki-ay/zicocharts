@@ -2,11 +2,15 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import os, json, requests, glob
+import platform
 
-BASE_USER = "zicofinance/zicofinance"
-#BASE_USER = "homer/zcharts"
+if platform.system() == "Windows":
+    BASE_USER = r"C:\Users\za-yah\OneDrive - Sectra\Documents\zicocharts"
+else:
+    BASE_USER = "/home/zicocharts/zicocharts"
 
-BASE_IMG_DIR = f"/home/{BASE_USER}/tmp/"
+
+BASE_IMG_DIR = f"{BASE_USER}/tmp/"
 BASE_IMG_URL = 'https://zaki-ay.github.io/zicocharts_images/plots/'
 
 def clear_tmp_folder():

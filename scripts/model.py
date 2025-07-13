@@ -1,10 +1,8 @@
 import numpy as np
-import json, gzip, os, sys, pickle
-import matplotlib.pyplot as plt
-from PIL import Image
-from tensorflow.keras.applications import VGG16
-from tensorflow.keras.applications.vgg16 import preprocess_input
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
+import gzip, pickle
+from tensorflow.python.keras.applications import VGG16
+from tensorflow.python.keras.applications.vgg16 import preprocess_input
+from tensorflow.python.keras.preprocessing.image import load_img, img_to_array
 from sklearn.neighbors import NearestNeighbors
 
 def preprocess_input_image(input_image_path):
